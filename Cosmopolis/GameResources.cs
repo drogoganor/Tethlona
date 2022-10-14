@@ -6,8 +6,6 @@ using System.IO;
 using System.Text.Json;
 using Veldrid;
 
-#nullable disable
-
 namespace Cosmopolis
 {
     public class GameResources

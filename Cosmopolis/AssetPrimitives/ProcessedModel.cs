@@ -3,8 +3,6 @@ using System.IO;
 using System.Numerics;
 using Veldrid;
 
-#nullable disable
-
 namespace Cosmopolis.AssetPrimitives
 {
     public class ProcessedModel

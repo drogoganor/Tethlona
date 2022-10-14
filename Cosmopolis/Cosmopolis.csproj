@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Content\mapcity.json" />
+    <None Remove="Content\mapdemo2.json" />
     <None Remove="Content\settings.json" />
     <None Remove="Content\textures.json" />
     <None Remove="Content\textures\bricks1.png" />
@@ -23,6 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Content\mapcity.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\mapdemo2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

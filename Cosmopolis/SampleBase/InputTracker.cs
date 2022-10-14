@@ -2,8 +2,6 @@
 using System.Numerics;
 using Veldrid;
 
-#nullable disable
-
 namespace Cosmopolis.SampleBase
 {
     public static class InputTracker

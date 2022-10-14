@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Cosmopolis.Data;
+using Cosmopolis.Providers;
+using System;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using Veldrid;
-
-#nullable disable
 
 namespace Cosmopolis.SampleBase
 {
@@ -30,10 +30,11 @@ namespace Cosmopolis.SampleBase
         public event Action<Matrix4x4> ProjectionChanged;
         public event Action<Matrix4x4> ViewChanged;
 
-        public Camera(float width, float height)
+        public Camera(SettingsProvider settingsProvider)
         {
-            _windowWidth = width;
-            _windowHeight = height;
+            var settings = settingsProvider.Settings;
+            _windowWidth = settings.ScreenResolution.X;
+            _windowHeight = settings.ScreenResolution.Y;
             UpdatePerspectiveMatrix();
             UpdateViewMatrix();
         }

@@ -1,8 +1,6 @@
 ﻿using Cosmopolis.Data;
 using System.Numerics;
 
-#nullable disable
-
 namespace Cosmopolis
 {
     public enum CubeFace : byte

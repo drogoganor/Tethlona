@@ -3,28 +3,27 @@ using Cosmopolis.SampleBase;
 using System.Numerics;
 using System;
 
-#nullable disable
-
-namespace Cosmopolis
+namespace Cosmopolis.UI
 {
-    public class MainMenu : Menu
+    public class InGameMenu : Menu
     {
-        public event Action OnNewGame;
+        public event Action OnEndGame;
+        public event Action OnReturnToGame;
 
-        public MainMenu(IApplicationWindow window) : base(window)
+        public InGameMenu(IApplicationWindow window) : base(window)
         {
         }
 
-        private void NewGame()
+        private void EndGame()
         {
             Hide();
-            OnNewGame?.Invoke();
+            OnEndGame?.Invoke();
         }
 
-        private void ExitGame()
+        private void ReturnToGame()
         {
             Hide();
-            Window.Close();
+            OnReturnToGame?.Invoke();
         }
 
         protected override void Draw(float deltaSeconds)
@@ -47,18 +46,24 @@ namespace Cosmopolis
                 ImGuiWindowFlags.NoMove |
                 ImGuiWindowFlags.NoResize))
             {
-                HorizontallyCenteredText("Cosmopolis", menuSize.X);
+                HorizontallyCenteredText("Cosmopolis - Ingame Menu", menuSize.X);
 
                 ImGui.SetCursorPosX(menuPadding / 2f);
-                if (ImGui.Button("New Game", buttonSize))
+                if (ImGui.Button("Return to Game", buttonSize))
                 {
-                    NewGame();
+                    ReturnToGame();
+                }
+
+                ImGui.SetCursorPosX(menuPadding / 2f);
+                if (ImGui.Button("End Game", buttonSize))
+                {
+                    EndGame();
                 }
 
                 ImGui.SetCursorPosX(menuPadding / 2f);
                 if (ImGui.Button("Quit", buttonSize))
                 {
-                    ExitGame();
+                    //ExitGame();
                 }
             }
 

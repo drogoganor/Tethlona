@@ -1,8 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using Veldrid;
 
-#nullable disable
-
 namespace Cosmopolis.Data
 {
     public class TextureFile

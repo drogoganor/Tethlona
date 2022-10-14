@@ -31,7 +31,7 @@ namespace Cosmopolis.SampleBase
             {
                 X = 100,
                 Y = 100,
-                WindowWidth = 1280,
+                WindowWidth = 1024,
                 WindowHeight = 720,
                 WindowTitle = "Cosmopolis",
             };

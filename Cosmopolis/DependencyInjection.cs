@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Cosmopolis.Providers;
 using Cosmopolis.SampleBase;
+using Cosmopolis.UI;
 
 namespace Cosmopolis
 {
@@ -25,6 +26,12 @@ namespace Cosmopolis
             builder
                 .RegisterType<VeldridStartupWindow>()
                 .As<IApplicationWindow>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<Camera>()
+                .AsSelf()
+                .AsImplementedInterfaces()
                 .SingleInstance();
 
             builder

@@ -1,5 +1,6 @@
 ﻿using Cosmopolis.Data;
 using Cosmopolis.SampleBase;
+using Cosmopolis.UI;
 using System;
 using System.Numerics;
 using System.Text;
@@ -28,12 +29,17 @@ namespace Cosmopolis
 
         private InGameMenu inGameMenu;
         private GameMapReader gameMapReader;
+        private Camera camera;
 
-        public Game(IApplicationWindow window) : base(window)
+        public Game(
+            IApplicationWindow window,
+            Camera camera) : base(window, camera)
         {
-            //gameMapReader = new GameMapReader("mapcity.json");
+            this.camera = camera;
 
-            //_vertices = gameMapReader.GetVertexArray();
+            gameMapReader = new GameMapReader("mapdemo2.json");
+
+            _vertices = gameMapReader.GetVertexArray();
 
             inGameMenu = new InGameMenu(window);
             inGameMenu.OnReturnToGame += InGameMenu_OnReturnToGame;
@@ -64,12 +70,12 @@ namespace Cosmopolis
             _projectionBuffer = factory.CreateBuffer(new BufferDescription(64, BufferUsage.UniformBuffer));
             _viewBuffer = factory.CreateBuffer(new BufferDescription(64, BufferUsage.UniformBuffer));
             _worldBuffer = factory.CreateBuffer(new BufferDescription(64, BufferUsage.UniformBuffer));
-            /*
-            _vertexBuffer = factory.CreateBuffer(new BufferDescription((uint)(VertexPositionTexture.SizeInBytes * _vertices.Length), BufferUsage.VertexBuffer));
-            GraphicsDevice.UpdateBuffer(_vertexBuffer, 0, _vertices);
 
-            //_indexBuffer = factory.CreateBuffer(new BufferDescription(sizeof(ushort) * (uint)_indices.Length, BufferUsage.IndexBuffer));
-            //GraphicsDevice.UpdateBuffer(_indexBuffer, 0, _indices);
+            if (_vertices != null)
+            {
+                _vertexBuffer = factory.CreateBuffer(new BufferDescription((uint)(VertexPositionTexture.SizeInBytes * _vertices.Length), BufferUsage.VertexBuffer));
+                GraphicsDevice.UpdateBuffer(_vertexBuffer, 0, _vertices);
+            }
 
             _surfaceTextureView = gameResources.TextureView;
 
@@ -116,7 +122,7 @@ namespace Cosmopolis
                 GraphicsDevice.Aniso4xSampler));
 
             _cl = factory.CreateCommandList();
-            */
+
         }
 
         protected override void OnDeviceDestroyed()
@@ -135,26 +141,26 @@ namespace Cosmopolis
                 ShowInGameMenu();
             }
 
-            return;
+            camera.Update(deltaSeconds);
+
+            if (_vertices == null)
+            {
+                return;
+            }
 
             // Render
             _ticks += deltaSeconds * 1000f;
             _cl.Begin();
 
-            var zoomFactor = 128f;
-            _cl.UpdateBuffer(_projectionBuffer, 0, Matrix4x4.CreateOrthographic(
-                zoomFactor,
-                Window.Width / Window.Height * zoomFactor,
+            var projection = Matrix4x4.CreatePerspectiveFieldOfView(
+                1.0f,
+                (float)Window.Width / Window.Height,
                 0.5f,
-                100f));
+                1000f);
 
-            var cameraPos = new Vector3(0, 0, -10f);
+            _cl.UpdateBuffer(_projectionBuffer, 0, projection);
 
-            var view = Matrix4x4.CreateLookAt(Vector3.Transform(cameraPos, Matrix4x4.CreateFromYawPitchRoll(0.785398f, 0.610865f, 0)), // 45 and 35 degrees
-                Vector3.Zero, Vector3.UnitY);
-            //return Matrix.CreateLookAt(Vector3.Transform(position, Matrix.CreateFromYawPitchRoll(MathHelper.ToRadians(45), MathHelper.ToRadians(35), 0)),
-            //        Vector3.Transform(lookAtVector, Matrix.CreateFromYawPitchRoll(MathHelper.ToRadians(45), MathHelper.ToRadians(35), 0)),
-            //        upVector);
+            var view = Matrix4x4.CreateLookAt(camera.Position, camera.Position - Vector3.UnitZ, Vector3.UnitY);
 
             _cl.UpdateBuffer(_viewBuffer, 0, view);
             //_cl.UpdateBuffer(_viewBuffer, 0, Matrix4x4.CreateRotationX(0.785398f) * Matrix4x4.CreateRotationY(0.523599f));

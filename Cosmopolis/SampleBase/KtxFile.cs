@@ -7,8 +7,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Veldrid;
 
-#nullable disable
-
 namespace Cosmopolis.SampleBase
 {
     // A hand-crafted KTX file parser.

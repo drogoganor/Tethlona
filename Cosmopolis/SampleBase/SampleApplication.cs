@@ -5,8 +5,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Veldrid;
 
-#nullable disable
-
 namespace Cosmopolis.SampleBase
 {
     public abstract class SampleApplication : IGameScreen
@@ -20,14 +18,16 @@ namespace Cosmopolis.SampleBase
         public ResourceFactory ResourceFactory { get; private set; }
         public Swapchain MainSwapchain { get; private set; }
 
-        public SampleApplication(IApplicationWindow window)
+        public SampleApplication(
+            IApplicationWindow window,
+            Camera camera)
         {
             Window = window;
             Window.Resized += HandleWindowResize;
             Window.GraphicsDeviceCreated += OnGraphicsDeviceCreated;
             Window.GraphicsDeviceDestroyed += OnDeviceDestroyed;
 
-            _camera = new Camera(Window.Width, Window.Height);
+            _camera = camera;
         }
 
         public void Show()

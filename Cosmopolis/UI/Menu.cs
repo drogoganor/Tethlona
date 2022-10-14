@@ -2,7 +2,7 @@
 using Cosmopolis.SampleBase;
 using Veldrid;
 
-namespace Cosmopolis
+namespace Cosmopolis.UI
 {
     public abstract class Menu : IGameScreen
     {
