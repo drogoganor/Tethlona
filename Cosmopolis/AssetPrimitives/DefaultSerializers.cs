@@ -1,4 +1,7 @@
-﻿namespace Cosmopolis.AssetPrimitives
+﻿using System;
+using System.Collections.Generic;
+
+namespace Cosmopolis.AssetPrimitives
 {
     public static class DefaultSerializers
     {

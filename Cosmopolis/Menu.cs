@@ -7,14 +7,14 @@ namespace Cosmopolis
     public abstract class Menu : IGameScreen
     {
         public IApplicationWindow Window { get; }
-        public GraphicsDevice? GraphicsDevice { get; private set; }
-        public ResourceFactory? ResourceFactory { get; private set; }
-        public Swapchain? MainSwapchain { get; private set; }
+        public GraphicsDevice GraphicsDevice { get; private set; }
+        public ResourceFactory ResourceFactory { get; private set; }
+        public Swapchain MainSwapchain { get; private set; }
 
-        private ImGuiRenderer? imGuiRenderer;
-        private CommandList? commandList;
+        private ImGuiRenderer imGuiRenderer;
+        private CommandList commandList;
         private bool isShown;
-        private InputSnapshot? inputSnapshot;
+        private InputSnapshot inputSnapshot;
 
         protected virtual string GetTitle() => GetType().Name;
         protected ImFontPtr? font;

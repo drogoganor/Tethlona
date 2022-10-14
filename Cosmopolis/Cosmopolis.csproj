@@ -3,12 +3,57 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="GameMap.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Content\settings.json" />
+    <None Remove="Content\textures.json" />
+    <None Remove="Content\textures\bricks1.png" />
+    <None Remove="Content\textures\grass.png" />
+    <None Remove="Content\textures\pavement1.png" />
+    <None Remove="Content\textures\placeholder-grey1.png" />
+    <None Remove="Content\textures\placeholder-grey2.png" />
+    <None Remove="Content\textures\placeholder-window1.png" />
+    <None Remove="Content\textures\road1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Content\settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\textures\bricks1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\textures\grass.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\textures\pavement1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\textures\placeholder-grey1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\textures\placeholder-grey2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\textures\placeholder-window1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\textures\road1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.4.0" />
     <PackageReference Include="ImGui.NET" Version="1.87.3" />
     <PackageReference Include="Veldrid" Version="4.9.0-beta2" />
     <PackageReference Include="Veldrid.ImageSharp" Version="4.9.0-beta2" />
@@ -16,6 +61,10 @@
     <PackageReference Include="Veldrid.SPIRV" Version="1.0.15" />
     <PackageReference Include="Veldrid.StartupUtilities" Version="4.9.0-beta2" />
     <PackageReference Include="Veldrid.Utilities" Version="4.9.0-beta2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Providers\" />
   </ItemGroup>
 
 </Project>

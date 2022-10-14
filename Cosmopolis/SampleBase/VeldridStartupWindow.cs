@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
@@ -9,22 +10,22 @@ namespace Cosmopolis.SampleBase
     public class VeldridStartupWindow : IApplicationWindow
     {
         private readonly Sdl2Window _window;
-        private GraphicsDevice? _gd;
-        private DisposeCollectorResourceFactory? _factory;
+        private GraphicsDevice _gd;
+        private DisposeCollectorResourceFactory _factory;
         private bool _windowResized = true;
 
-        public event Action<float>? Rendering;
-        public event Action<GraphicsDevice, ResourceFactory, Swapchain>? GraphicsDeviceCreated;
-        public event Action? GraphicsDeviceDestroyed;
-        public event Action? Resized;
-        public event Action<KeyEvent>? KeyPressed;
+        public event Action<float> Rendering;
+        public event Action<GraphicsDevice, ResourceFactory, Swapchain> GraphicsDeviceCreated;
+        public event Action GraphicsDeviceDestroyed;
+        public event Action Resized;
+        public event Action<KeyEvent> KeyPressed;
 
         public uint Width => (uint)_window.Width;
         public uint Height => (uint)_window.Height;
 
         public SamplePlatformType PlatformType => SamplePlatformType.Desktop;
 
-        public VeldridStartupWindow(string title)
+        public VeldridStartupWindow()
         {
             var wci = new WindowCreateInfo
             {
@@ -32,7 +33,7 @@ namespace Cosmopolis.SampleBase
                 Y = 100,
                 WindowWidth = 1280,
                 WindowHeight = 720,
-                WindowTitle = title,
+                WindowTitle = "Cosmopolis",
             };
 
             _window = VeldridStartup.CreateWindow(ref wci);

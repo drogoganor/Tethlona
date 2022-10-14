@@ -1,4 +1,6 @@
-﻿namespace Cosmopolis.AssetPrimitives
+﻿using System.IO;
+
+namespace Cosmopolis.AssetPrimitives
 {
     public class ByteArraySerializer : BinaryAssetSerializer<byte[]>
     {

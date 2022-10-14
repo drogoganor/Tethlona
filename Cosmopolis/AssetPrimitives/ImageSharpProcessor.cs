@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Veldrid;
 using System.Runtime.InteropServices;
+using System.IO;
+using System;
 
 namespace Cosmopolis.AssetPrimitives
 {

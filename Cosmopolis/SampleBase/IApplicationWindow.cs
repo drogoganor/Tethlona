@@ -1,4 +1,5 @@
-﻿using Veldrid;
+﻿using System;
+using Veldrid;
 
 namespace Cosmopolis.SampleBase
 {

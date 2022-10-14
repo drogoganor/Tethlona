@@ -1,11 +1,10 @@
 ﻿using Cosmopolis.Data;
 using Cosmopolis.SampleBase;
+using System;
 using System.Numerics;
 using System.Text;
 using Veldrid;
 using Veldrid.SPIRV;
-
-#nullable disable
 
 namespace Cosmopolis
 {
@@ -32,9 +31,9 @@ namespace Cosmopolis
 
         public Game(IApplicationWindow window) : base(window)
         {
-            gameMapReader = new GameMapReader("mapcity.json");
+            //gameMapReader = new GameMapReader("mapcity.json");
 
-            _vertices = gameMapReader.GetVertexArray();
+            //_vertices = gameMapReader.GetVertexArray();
 
             inGameMenu = new InGameMenu(window);
             inGameMenu.OnReturnToGame += InGameMenu_OnReturnToGame;
@@ -65,7 +64,7 @@ namespace Cosmopolis
             _projectionBuffer = factory.CreateBuffer(new BufferDescription(64, BufferUsage.UniformBuffer));
             _viewBuffer = factory.CreateBuffer(new BufferDescription(64, BufferUsage.UniformBuffer));
             _worldBuffer = factory.CreateBuffer(new BufferDescription(64, BufferUsage.UniformBuffer));
-
+            /*
             _vertexBuffer = factory.CreateBuffer(new BufferDescription((uint)(VertexPositionTexture.SizeInBytes * _vertices.Length), BufferUsage.VertexBuffer));
             GraphicsDevice.UpdateBuffer(_vertexBuffer, 0, _vertices);
 
@@ -117,6 +116,7 @@ namespace Cosmopolis
                 GraphicsDevice.Aniso4xSampler));
 
             _cl = factory.CreateCommandList();
+            */
         }
 
         protected override void OnDeviceDestroyed()
@@ -134,6 +134,8 @@ namespace Cosmopolis
             {
                 ShowInGameMenu();
             }
+
+            return;
 
             // Render
             _ticks += deltaSeconds * 1000f;

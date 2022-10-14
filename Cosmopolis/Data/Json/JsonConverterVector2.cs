@@ -1,18 +1,19 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Cosmopolis.Data
+namespace Cosmopolis.Data.Json
 {
-    public class JsonConverterVector3 : JsonConverter<Vector3>
+    public class JsonConverterVector2 : JsonConverter<Vector2>
     {
-        public override Vector3 Read(
+        public override Vector2 Read(
             ref Utf8JsonReader reader,
             Type typeToConvert,
             JsonSerializerOptions options)
         {
             var allValuesRead = false;
-            var valueArray = new float[3];
+            var valueArray = new float[2];
             var index = 0;
             while (!allValuesRead && reader.Read())
             {
@@ -29,18 +30,17 @@ namespace Cosmopolis.Data
                 index++;
             }
 
-            return new Vector3(valueArray[0], valueArray[1], valueArray[2]);
+            return new Vector2(valueArray[0], valueArray[1]);
         }
 
         public override void Write(
             Utf8JsonWriter writer,
-            Vector3 value,
+            Vector2 value,
             JsonSerializerOptions options)
         {
             writer.WriteStartArray();
             writer.WriteNumberValue(value.X);
             writer.WriteNumberValue(value.Y);
-            writer.WriteNumberValue(value.Z);
             writer.WriteEndArray();
         }
     }

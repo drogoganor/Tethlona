@@ -1,4 +1,6 @@
-﻿using Veldrid;
+﻿using System;
+using System.IO;
+using Veldrid;
 
 namespace Cosmopolis.AssetPrimitives
 {

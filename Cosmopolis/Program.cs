@@ -1,20 +1,6 @@
-﻿using Cosmopolis;
-using Cosmopolis.SampleBase;
+﻿using Autofac;
+using Cosmopolis;
 
-var window = new VeldridStartupWindow("Cosmopolis");
-var mainMenu = new MainMenu(window);
-var game = new Game(window);
-
-mainMenu.Show();
-mainMenu.OnNewGame += () =>
-{
-    mainMenu.Hide();
-    game.Show();
-    game.OnEndGame += () =>
-    {
-        game.Hide();
-        mainMenu.Show();
-    };
-};
-
-window.Run();
+var container = DependencyInjection.Build();
+var startup = container.Resolve<Startup>();
+startup.Run();
